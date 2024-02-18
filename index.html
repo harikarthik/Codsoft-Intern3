@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        nav{
+            margin: 0;
+            display: flex;
+            justify-content: space-between;
+            background-color: #578c7b;
+            /*background-image: linear-gradient(to top, #3167b8, #82478b, #8f3352, #793622, #523d05);
+            */padding: 15px;
+            overflow: hidden;
+            align-items: center;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            /*border-radius: 15px;*/
+        }
+        .navbar-mainlogo{
+            padding-left: 35px;
+        }
+        .navbar-mainhead{
+            font-family: 'Roboto', sans-serif;
+            padding-left: 155px;
+            transition: transform 0.3s ease;
+            color: #fff;
+            font-size: 22px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .navbar-mainhead:hover{
+            transform: scale(1.2);
+            /*color:chocolate;*/
+        }
+        .navbar-mainsocials{
+            padding: 15px;
+            padding-right: 50px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .navbar-n{
+            padding: 2px;
+            border-radius: 50%;
+            width:40px;
+            height:40px;
+            transition: transform 0.3s ease;
+        }
+        .navbar-n:hover{            
+            border-radius: 50%;
+            transform: scale(1.5);
+        }
+        form{
+            border: none;
+            border-radius: 25px;
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: 90px 1fr; 
+            grid-gap: 20px;
+            width: 32vw;
+            margin-top: 50px;
+            background: linear-gradient(rgb(83, 133, 226),rgb(17, 163, 216));
+            height: 80vh;
+        }
+        .display{
+            /* border: 2px solid red; */
+            padding: 10px;
+            /* height: 50px; */
+        }
+        #out{
+            border-radius: 9px;
+            margin-top: 15px;
+            font-size: 34px;
+            width: 99%;
+            height: 70px;
+            background-color: rgb(241, 230, 230);
+            text-align: right;
+            border: none;
+        }
+        .act{
+            margin: 10px;
+            display: grid;
+            grid-gap: 15px;
+            grid-template-columns: repeat(4,1fr);
+            grid-template-rows: auto-fill;
+            grid-template-areas: 
+            "eq eq emp mul"
+            "num7 num8 num9 sub"
+            "num4 num5 num6 sum"
+            "num1 num2 num3 cl"
+            "num0 dec div cl";
+        }
+        #num0{
+            grid-area: num0;
+        }
+        #dec{
+            grid-area: dec;
+        }
+        #sum{
+            grid-area: sum;
+        }
+        #equal{
+            grid-area: cl;
+        }
+        #clear{
+            grid-area: eq;
+        }
+        #num7{
+            grid-area: num7;
+        }
+        #num8{
+            grid-area: num8;
+        }
+        #num9{
+            grid-area: num9;
+        }
+        #sub{
+            grid-area: sub;
+        }
+        #mul{
+            grid-area: mul;
+        }
+        input{
+            font-size: 24px;
+        }
+        input[type="button"],input[type="reset"]{
+            border-radius: 10px;
+            font-weight: bold;
+            border: 2px solid gray;
+        }
+        #clear,#equal, #div,#sum,#sub,#mul{
+            background-color: rgb(136, 240, 176);
+        }
+        .cc{
+            display: flex;
+            justify-content: center;
+            background-color: pink;
+            padding-bottom: 15px;
+        }
+        input{
+            font-family: Courier New (monospace);
+            transition: transform 0.3s ease;
+        }
+        input:hover{
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="navbar-mainlogo">
+            <a href="http://bombastickk.infinityfreeapp.com/?i=1">
+                <img class="navbar-n" src="https://cdn1.iconfinder.com/data/icons/capsocial/500/iconfinder-512.png" alt="logo">   
+            </a>
+        </div>
+        <div class="navbar-mainhead">
+            <h1><center>
+                CODSOFT INTERNSHIP
+            </center></h1>
+        </div>
+        <div class="navbar-mainsocials">              
+            <a href="https://www.linkedin.com/in/kartikey-here/">  
+                <img class="navbar-n" src="https://cdn4.iconfinder.com/data/icons/social-messaging-ui-color-shapes-2-free/128/social-linkedin-square1-512.png" alt="linkedin">
+            </a>
+            <a href="https://www.instagram.com/kartikey_._here/">  
+                <img class="navbar-n" src="https://cdn4.iconfinder.com/data/icons/social-messaging-ui-color-shapes-2-free/128/social-instagram-new-square2-512.png" alt="ig">
+            </a>
+            <a href="https://twitter.com/kartikey_here">
+                <img class="navbar-n" src="https://cdn4.iconfinder.com/data/icons/social-messaging-ui-color-shapes-2-free/128/social-twitter-square2-512.png" alt="twitter">
+            </a>
+            <a href="https://www.reddit.com/user/cooolkits">
+                <img class="navbar-n" src="https://cdn4.iconfinder.com/data/icons/social-messaging-ui-color-shapes-2-free/128/social-reddit-square1-512.png" alt="reddit">
+            </a>
+        </div>
+    </nav>
+    <center><h1><b>Task3: Calculator</b></h1></center>
+    <div class="cc">
+    <form action="">
+        <div class="display">
+            <input type="text" name="text" id="out" readonly>
+        </div>
+        <div class="act">
+            <div id="emp"></div>
+            <input type="button" id="sum" onclick="add('+')" value="+">
+            <input type="button" id="num7" onclick="add(7)" value="7">
+            <input type="button" id="num8" onclick="add(8)" value="8">
+            <input type="button" id="num9" onclick="add(9)" value="9">
+            <input type="button" id="num4" onclick="add(4)" value="4">
+            <input type="button" id="num5" onclick="add(5)" value="5">
+            <input type="button" id="num6" onclick="add(6)" value="6">
+            <input type="button" id="num1" onclick="add(1)" value="1">
+            <input type="button" id="num2" onclick="add(2)" value="2">
+            <input type="button" id="num3" onclick="add(3)" value="3">
+            <input type="button" id="div" onclick="add('/')" value="/">
+            <input type="button" id="mul" onclick="add('*')" value="X">
+            <input type="button" id="sub" onclick="add('-')" value="-">
+            <input type="button" id="equal" onclick="cal()" value="=">
+            <input type="button" id="num0" onclick="add(0)" value="0">
+            <input type="button" id="dec" onclick="add('.')" value=".">
+            <input type="reset"  id="clear" value="C">
+        </div>
+    </form>
+    </div>
+    
+</body>
+<script>
+    function add(x){
+        document.getElementById("out").value += x; 
+    }
+    function cal(){
+        var output = document.getElementById("out").value;
+        var result = eval(output);
+        document.getElementById("out").value = result;
+        document.getElementById("out").value = result;
+    }
+</script>
+</html>
